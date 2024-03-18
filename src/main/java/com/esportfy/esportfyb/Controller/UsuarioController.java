@@ -19,8 +19,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastro")
-    public String cadastro( Usuario usuario){
-        return service.salvar(usuario);
+    public String cadastro(@RequestBody Usuario usuario){
+        System.out.println("Usuario: " + usuario);
+        return service.salvar( usuario);
     }
 
     @GetMapping("/excluir/{id}")

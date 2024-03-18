@@ -30,6 +30,17 @@ public class Usuario {
 
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
