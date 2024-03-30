@@ -1,10 +1,10 @@
 package com.esportfy.esportfyb.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.esportfy.esportfyb.enums.QuadraType;
+import jakarta.persistence.*;
 
+
+@Table(name = "quadras")
 @Entity
 public class Quadra {
 
@@ -16,19 +16,20 @@ public class Quadra {
     private String phone;
     private String email;
     private String date;
+    private QuadraType type;
 
-    public Quadra(int id, String name, String address, String phone, String email, String date) {
+
+    public Quadra(int id, String name, String address, String phone, String email, String date, QuadraType type) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
         this.date = date;
+        this.type = type;
     }
 
-
     public Quadra() {
-
     }
 
     public int getId() {
@@ -77,5 +78,13 @@ public class Quadra {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public QuadraType getType() {
+        return type;
+    }
+
+    public void setType(QuadraType type) {
+        this.type = type;
     }
 }

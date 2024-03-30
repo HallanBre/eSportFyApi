@@ -1,6 +1,7 @@
 package com.esportfy.esportfyb.dto;
 
 import com.esportfy.esportfyb.entities.Quadra;
+import com.esportfy.esportfyb.enums.QuadraType;
 
 public class QuadraDto {
 
@@ -10,6 +11,7 @@ public class QuadraDto {
     private String phone;
     private String email;
     private String date;
+    private QuadraType type;
 
     public QuadraDto(Quadra quadra) {
         this.id = quadra.getId();
@@ -18,8 +20,8 @@ public class QuadraDto {
         this.phone = quadra.getPhone();
         this.email = quadra.getEmail();
         this.date = quadra.getDate();
+        this.type = quadra.getType();
     }
-
 
     public int getId() {
         return id;
@@ -68,4 +70,13 @@ public class QuadraDto {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public QuadraType getType() {
+        return type;
+    }
+
+    public void setType(QuadraType type) {
+        this.type = type;
+    }
 }
+

@@ -1,13 +1,18 @@
 package com.esportfy.esportfyb.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.esportfy.esportfyb.enums.UserRole;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
+
+@Table(name = "usuarios")
 @Entity
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,30 +21,65 @@ public class Usuario {
     private String email;
     private String password;
     private String date;
+    private UserRole role;
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),new SimpleGrantedAuthority("ROLE_USER"));
+            else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
 
-    public Usuario(int id, String name, String email, String password, String date) {
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    public Usuario(String name,String email, String password, UserRole role, String date){
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.date = date;
+    }
+    public Usuario(int id, String name, String email, String password, String date, UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.date = date;
+        this.role = role;
     }
+
     public Usuario() {
-
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", date='" + date + '\'' +
-                '}';
-    }
 
     public int getId() {
         return id;
@@ -65,10 +105,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -80,4 +116,16 @@ public class Usuario {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 }
+
+
+
+

@@ -1,6 +1,7 @@
 package com.esportfy.esportfyb.dto;
 
 import com.esportfy.esportfyb.entities.Usuario;
+import com.esportfy.esportfyb.enums.UserRole;
 
 public class UsuarioDto {
 
@@ -9,6 +10,7 @@ public class UsuarioDto {
     private String email;
     private String password;
     private String date;
+    private UserRole role;
 
     public UsuarioDto(Usuario usuario) {
         this.id = usuario.getId();
@@ -16,6 +18,7 @@ public class UsuarioDto {
         this.email = usuario.getEmail();
         this.password = usuario.getPassword();
         this.date = usuario.getDate();
+        this.role = usuario.getRole();
     }
 
     public int id() {
@@ -60,6 +63,13 @@ public class UsuarioDto {
 
     public UsuarioDto setDate(String date) {
         this.date = date;
+        return this;
+    }
+    public String getRole() {
+        return role.getRole();
+    }
+    public UsuarioDto setRole(UserRole role) {
+        this.role = role;
         return this;
     }
 }
