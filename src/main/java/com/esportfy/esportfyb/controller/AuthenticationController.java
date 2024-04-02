@@ -1,8 +1,10 @@
 package com.esportfy.esportfyb.controller;
 
 import com.esportfy.esportfyb.dto.AuthenticationDto;
+import com.esportfy.esportfyb.dto.LoginResponseDto;
 import com.esportfy.esportfyb.dto.RegisterDto;
 import com.esportfy.esportfyb.entities.Usuario;
+import com.esportfy.esportfyb.infra.security.TokenService;
 import com.esportfy.esportfyb.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +25,18 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UsuarioRepository repository;
+    @Autowired
+    private TokenService tokenService;
+
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Validated AuthenticationDto data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.name(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((Usuario) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDto(token));
     }
 
     @PostMapping("/cadastro")
