@@ -22,6 +22,9 @@ public class Usuario implements UserDetails {
     private String password;
     private String date;
     private UserRole role;
+    @OneToMany
+    @JoinColumn(name="endereco_id")
+    private List<Endereco> endereco;
 
 
     @Override
@@ -68,13 +71,14 @@ public class Usuario implements UserDetails {
         this.role = role;
         this.date = date;
     }
-    public Usuario(int id, String name, String email, String password, String date, UserRole role) {
+    public Usuario(int id, String name, String email, String password, String date, UserRole role,List<Endereco> endereco) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.date = date;
         this.role = role;
+        this.endereco = endereco;
     }
 
     public Usuario() {
@@ -123,6 +127,14 @@ public class Usuario implements UserDetails {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public List<Endereco> getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(List<Endereco> endereco) {
+        this.endereco = endereco;
     }
 }
 

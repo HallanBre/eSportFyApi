@@ -1,32 +1,28 @@
 package com.esportfy.esportfyb.entities;
 
-import com.esportfy.esportfyb.enums.QuadraType;
 import jakarta.persistence.*;
 
+import java.util.List;
 
-@Table(name = "quadras")
 @Entity
 public class Quadra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private String address;
-    private String phone;
-    private String email;
-    private String date;
-    private QuadraType type;
+    private int numeroJogadores;
+    private int tempoPartida;
+    @ManyToOne
+    private Categoria categoria;
+
+    //Endereço_ID
 
 
-    public Quadra(int id, String name, String address, String phone, String email, String date, QuadraType type) {
+    public Quadra(int id, int numeroJogadores, int tempoPartida) {
         this.id = id;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        this.date = date;
-        this.type = type;
+        this.numeroJogadores = numeroJogadores;
+        this.tempoPartida = tempoPartida;
+
     }
 
     public Quadra() {
@@ -40,51 +36,21 @@ public class Quadra {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getNumeroJogadores() {
+        return numeroJogadores;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumeroJogadores(int numeroJogadores) {
+        this.numeroJogadores = numeroJogadores;
     }
 
-    public String getAddress() {
-        return address;
+    public int getTempoPartida() {
+        return tempoPartida;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setTempoPartida(int tempoPartida) {
+        this.tempoPartida = tempoPartida;
     }
 
-    public String getPhone() {
-        return phone;
-    }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public QuadraType getType() {
-        return type;
-    }
-
-    public void setType(QuadraType type) {
-        this.type = type;
-    }
 }

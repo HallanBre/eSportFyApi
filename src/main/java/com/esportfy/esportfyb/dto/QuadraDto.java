@@ -1,26 +1,19 @@
 package com.esportfy.esportfyb.dto;
 
 import com.esportfy.esportfyb.entities.Quadra;
-import com.esportfy.esportfyb.enums.QuadraType;
 
 public class QuadraDto {
 
     private int id;
-    private String name;
-    private String address;
-    private String phone;
-    private String email;
-    private String date;
-    private QuadraType type;
+    private int numeroJogadores;
+    private int tempoPartida;
 
     public QuadraDto(Quadra quadra) {
         this.id = quadra.getId();
-        this.name = quadra.getName();
-        this.address = quadra.getAddress();
-        this.phone = quadra.getPhone();
-        this.email = quadra.getEmail();
-        this.date = quadra.getDate();
-        this.type = quadra.getType();
+        this.numeroJogadores = quadra.getNumeroJogadores();
+        this.tempoPartida = quadra.getTempoPartida();
+    }
+    public QuadraDto() {
     }
 
     public int getId() {
@@ -31,52 +24,19 @@ public class QuadraDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getNumeroJogadores() {
+        return numeroJogadores;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumeroJogadores(int numeroJogadores) {
+        this.numeroJogadores = numeroJogadores;
     }
 
-    public String getAddress() {
-        return address;
+    public int getTempoPartida() {
+        return tempoPartida;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public QuadraType getType() {
-        return type;
-    }
-
-    public void setType(QuadraType type) {
-        this.type = type;
+    public void setTempoPartida(int tempoPartida) {
+        this.tempoPartida = tempoPartida;
     }
 }
-
