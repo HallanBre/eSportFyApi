@@ -15,6 +15,10 @@ public class Endereco {
     private String cep;
     @ManyToOne
     private Usuario usuario;
+    @OneToOne(cascade ={CascadeType.ALL})
+    @JoinColumn(name="quadra_id")
+    private Quadra quadra;
+
 
 
 
