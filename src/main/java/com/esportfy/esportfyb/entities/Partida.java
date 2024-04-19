@@ -2,6 +2,8 @@ package com.esportfy.esportfyb.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Partida {
     @Id
@@ -12,12 +14,16 @@ public class Partida {
     @OneToOne(cascade ={CascadeType.ALL})
     @JoinColumn(name="quadra_id")
     private Quadra quadra;
+    @OneToMany
+    @JoinColumn(name="usuario_id")
+    private List<Usuario> usuario;
 
-    public Partida(int id, String descricao, Boolean disponibilidade,Quadra quadra) {
+    public Partida(int id, String descricao, Boolean disponibilidade,Quadra quadra, List<Usuario> usuario) {
         this.id = id;
         this.descricao = descricao;
         this.disponibilidade = disponibilidade;
         this.quadra = quadra;
+        this.usuario = usuario;
     }
 
 
@@ -54,5 +60,13 @@ public class Partida {
 
     public void setQuadra(Quadra quadra) {
         this.quadra = quadra;
+    }
+
+    public List<Usuario> getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(List<Usuario> usuario) {
+        this.usuario = usuario;
     }
 }

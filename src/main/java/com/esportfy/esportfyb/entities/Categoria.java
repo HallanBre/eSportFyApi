@@ -13,7 +13,6 @@ public class Categoria {
     private String descricao;
     private String superficie;
     @OneToMany
-    @JoinColumn(name="quadra_id")
     private List<Quadra> quadra;
 
 

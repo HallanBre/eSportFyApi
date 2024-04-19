@@ -30,6 +30,9 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/cadastro").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuario/lista").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/quadra/lista").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/quadra/salvar").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/categoria/salvar").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

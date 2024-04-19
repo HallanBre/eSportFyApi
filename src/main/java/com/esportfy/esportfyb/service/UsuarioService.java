@@ -20,10 +20,6 @@ public class UsuarioService {
         this.repository = repository;
     }
 
-    public String salvar(Usuario usuario){
-        repository.save(usuario);
-        return "";
-    }
     public UsuarioDto buscaUsuario(int id){
         Usuario usuario = repository.findById(id);
         UsuarioDto dto = new UsuarioDto(usuario);

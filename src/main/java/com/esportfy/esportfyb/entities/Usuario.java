@@ -22,9 +22,13 @@ public class Usuario implements UserDetails {
     private String password;
     private String date;
     private UserRole role;
-    @OneToMany
+    @ManyToMany
     @JoinColumn(name="endereco_id")
     private List<Endereco> endereco;
+    @ManyToOne
+    private Partida partida;
+
+
 
 
     @Override
@@ -64,14 +68,8 @@ public class Usuario implements UserDetails {
     }
 
 
-    public Usuario(String name,String email, String password, UserRole role, String date){
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.date = date;
-    }
-    public Usuario(int id, String name, String email, String password, String date, UserRole role,List<Endereco> endereco) {
+
+    public Usuario(int id, String name, String email, String password, String date, UserRole role,List<Endereco> endereco,Partida partida) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -79,6 +77,12 @@ public class Usuario implements UserDetails {
         this.date = date;
         this.role = role;
         this.endereco = endereco;
+        this.partida = partida;
+
+    }
+
+    //construtor par ao controllerAuthentication
+    public Usuario(String name, String email, String encryptedPassword, UserRole role, String date) {
     }
 
     public Usuario() {
@@ -135,6 +139,14 @@ public class Usuario implements UserDetails {
 
     public void setEndereco(List<Endereco> endereco) {
         this.endereco = endereco;
+    }
+
+    public Partida getPartida() {
+        return partida;
+    }
+
+    public void setPartida(Partida partida) {
+        this.partida = partida;
     }
 }
 

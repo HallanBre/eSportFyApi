@@ -2,6 +2,8 @@ package com.esportfy.esportfyb.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Endereco {
     @Id
@@ -13,16 +15,15 @@ public class Endereco {
     private String cidade;
     private String estado;
     private String cep;
-    @ManyToOne
-    private Usuario usuario;
-    @OneToOne(cascade ={CascadeType.ALL})
-    @JoinColumn(name="quadra_id")
+    @ManyToMany
+    private List<Usuario> usuario;
+    @ManyToOne(cascade ={CascadeType.ALL})
     private Quadra quadra;
 
 
 
 
-    public Endereco(int id, String rua, int numero, String cidade, String bairro, String estado, String cep,Usuario usuario) {
+    public Endereco(int id, String rua, int numero, String cidade, String bairro, String estado, String cep,List<Usuario> usuario) {
         this.id = id;
         this.rua = rua;
         this.numero = numero;
@@ -91,5 +92,21 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public List<Usuario> getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(List<Usuario> usuario) {
+        this.usuario = usuario;
+    }
+
+    public Quadra getQuadra() {
+        return quadra;
+    }
+
+    public void setQuadra(Quadra quadra) {
+        this.quadra = quadra;
     }
 }

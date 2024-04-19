@@ -12,9 +12,11 @@ public class Quadra {
     private int id;
     private int numeroJogadores;
     private int tempoPartida;
-    private int type;
     @ManyToOne
+    @JoinColumn(name="categoria_id")
     private Categoria categoria;
+    @ManyToOne
+    private Empresa empresa;
     @OneToMany(cascade ={CascadeType.ALL})
     @JoinColumn(name="endereco_id")
     private List<Endereco> endereco;
@@ -23,17 +25,17 @@ public class Quadra {
     private Partida partida;
 
 
-    public Quadra(int id, int numeroJogadores, int tempoPartida,List<Endereco> endereco, Categoria categoria,Partida partida,int type) {
+    public Quadra(int id, int numeroJogadores, int tempoPartida,List<Endereco> endereco, Categoria categoria,Partida partida,Empresa empresa) {
         this.id = id;
         this.numeroJogadores = numeroJogadores;
         this.tempoPartida = tempoPartida;
         this.endereco = endereco;
         this.categoria = categoria;
         this.partida = partida;
-        this.type = type;
+        this.empresa = empresa;
+
 
     }
-
 
     public Quadra() {
 
@@ -87,12 +89,12 @@ public class Quadra {
         this.partida = partida;
     }
 
-    public int getType() {
-        return type;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 }
 

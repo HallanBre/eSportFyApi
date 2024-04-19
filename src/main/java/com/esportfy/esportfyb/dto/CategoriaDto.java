@@ -14,6 +14,8 @@ public class CategoriaDto {
     private String descricao;
     private String superficie;
 
+    private List<Quadra> quadra;
+
 
 
     public CategoriaDto(Categoria categoria) {
@@ -21,6 +23,7 @@ public class CategoriaDto {
         this.nome = categoria.getNome();
         this.descricao = categoria.getDescricao();
         this.superficie = categoria.getSuperficie();
+        this.quadra = categoria.getQuadra();
     }
     public CategoriaDto() {
     }
@@ -59,5 +62,11 @@ public class CategoriaDto {
         this.descricao = descricao;
     }
 
+    public List<Quadra> getQuadra() {
+        return quadra;
+    }
+    public void setQuadra(List<Quadra> quadra) {
+        this.quadra = quadra;
+    }
 
 }
