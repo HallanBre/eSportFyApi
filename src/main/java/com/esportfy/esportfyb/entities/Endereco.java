@@ -15,15 +15,13 @@ public class Endereco {
     private String cidade;
     private String estado;
     private String cep;
-    @ManyToMany
-    private List<Usuario> usuario;
     @ManyToOne(cascade ={CascadeType.ALL})
     private Quadra quadra;
 
 
 
 
-    public Endereco(int id, String rua, int numero, String cidade, String bairro, String estado, String cep,List<Usuario> usuario) {
+    public Endereco(int id, String rua, int numero, String cidade, String bairro, String estado, String cep) {
         this.id = id;
         this.rua = rua;
         this.numero = numero;
@@ -31,7 +29,7 @@ public class Endereco {
         this.bairro = bairro;
         this.estado = estado;
         this.cep = cep;
-        this.usuario = usuario;
+
     }
 
     public Endereco() {
@@ -93,15 +91,6 @@ public class Endereco {
     public void setCep(String cep) {
         this.cep = cep;
     }
-
-    public List<Usuario> getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(List<Usuario> usuario) {
-        this.usuario = usuario;
-    }
-
     public Quadra getQuadra() {
         return quadra;
     }

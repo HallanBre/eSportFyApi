@@ -2,6 +2,7 @@ package com.esportfy.esportfyb.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,19 +12,24 @@ public class Partida {
     private int id;
     private String descricao;
     private Boolean disponibilidade;
+    private int numeroJogadores;
+    private int tempoPartida;
+    private String dataHora;
     @OneToOne(cascade ={CascadeType.ALL})
     @JoinColumn(name="quadra_id")
     private Quadra quadra;
-    @OneToMany
-    @JoinColumn(name="usuario_id")
+    @OneToMany(mappedBy = "partida")
     private List<Usuario> usuario;
 
-    public Partida(int id, String descricao, Boolean disponibilidade,Quadra quadra, List<Usuario> usuario) {
+    public Partida(int id, String descricao, Boolean disponibilidade, int numeroJogadores, int tempoPartida,String dataHora,Quadra quadra, List<Usuario> usuario) {
         this.id = id;
         this.descricao = descricao;
         this.disponibilidade = disponibilidade;
         this.quadra = quadra;
         this.usuario = usuario;
+        this.numeroJogadores = numeroJogadores;
+        this.tempoPartida = tempoPartida;
+        this.dataHora = dataHora;
     }
 
 
@@ -68,5 +74,29 @@ public class Partida {
 
     public void setUsuario(List<Usuario> usuario) {
         this.usuario = usuario;
+    }
+
+    public int getNumeroJogadores() {
+        return numeroJogadores;
+    }
+
+    public void setNumeroJogadores(int numeroJogadores) {
+        this.numeroJogadores = numeroJogadores;
+    }
+
+    public int getTempoPartida() {
+        return tempoPartida;
+    }
+
+    public void setTempoPartida(int tempoPartida) {
+        this.tempoPartida = tempoPartida;
+    }
+
+    public String getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(String dataHora) {
+        this.dataHora = dataHora;
     }
 }

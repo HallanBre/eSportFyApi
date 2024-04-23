@@ -7,8 +7,7 @@ import java.util.List;
 public class QuadraDto {
 
     private int id;
-    private int numeroJogadores;
-    private int tempoPartida;
+    private String nome;
     private Categoria categoria;
     private Empresa empresa;
     private List<Endereco> endereco;
@@ -18,14 +17,16 @@ public class QuadraDto {
 
     public QuadraDto(Quadra quadra) {
         this.id = quadra.getId();
-        this.numeroJogadores = quadra.getNumeroJogadores();
-        this.tempoPartida = quadra.getTempoPartida();
         this.endereco = quadra.getEndereco();
         this.categoria = quadra.getCategoria();
         this.partida = quadra.getPartida();
         this.empresa = quadra.getEmpresa();
+        this.nome = quadra.getNome();
     }
     public QuadraDto() {
+    }
+
+    public QuadraDto(int id, String nome, String descricao) {
     }
 
     public int getId() {
@@ -35,23 +36,6 @@ public class QuadraDto {
     public void setId(int id) {
         this.id = id;
     }
-
-    public int getNumeroJogadores() {
-        return numeroJogadores;
-    }
-
-    public void setNumeroJogadores(int numeroJogadores) {
-        this.numeroJogadores = numeroJogadores;
-    }
-
-    public int getTempoPartida() {
-        return tempoPartida;
-    }
-
-    public void setTempoPartida(int tempoPartida) {
-        this.tempoPartida = tempoPartida;
-    }
-
     public Categoria getCategoria() {
         return categoria;
     }
@@ -82,5 +66,13 @@ public class QuadraDto {
 
     public void setPartida(Partida partida) {
         this.partida = partida;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

@@ -9,7 +9,7 @@ public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String razaoRosial;
+    private String razaoSocial;
     private String nome;
     private String cnpj;
     private String contato;
@@ -18,9 +18,9 @@ public class Empresa {
     @JoinColumn(name="quadra_id")
     private List<Quadra> quadra;
 
-    public Empresa(int id, String razaoRosial, String nome, String cnpj, String contato, String email, List<Quadra> quadra) {
+    public Empresa(int id, String razaoSocial, String nome, String cnpj, String contato, String email, List<Quadra> quadra) {
         this.id = id;
-        this.razaoRosial = razaoRosial;
+        this.razaoSocial = razaoSocial;
         this.nome = nome;
         this.cnpj = cnpj;
         this.contato = contato;
@@ -40,11 +40,11 @@ public class Empresa {
     }
 
     public String getRazaoRosial() {
-        return razaoRosial;
+        return razaoSocial;
     }
 
-    public void setRazaoRosial(String razaoRosial) {
-        this.razaoRosial = razaoRosial;
+    public void setrazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 
     public String getNome() {

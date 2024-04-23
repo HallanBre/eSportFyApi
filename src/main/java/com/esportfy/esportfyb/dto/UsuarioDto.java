@@ -25,9 +25,9 @@ public class UsuarioDto {
         this.password = usuario.getPassword();
         this.date = usuario.getDate();
         this.role = usuario.getRole();
-        this.endereco = usuario.getEndereco();
         this.partida = usuario.getPartida();
     }
+
 
     public int id() {
         return id;
@@ -84,15 +84,6 @@ public class UsuarioDto {
     public int getId() {
         return id;
     }
-
-    public List<Endereco> getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(List<Endereco> endereco) {
-        this.endereco = endereco;
-    }
-
     public Partida getPartida() {
         return partida;
     }

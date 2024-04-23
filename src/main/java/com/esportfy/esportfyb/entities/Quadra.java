@@ -10,8 +10,8 @@ public class Quadra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int numeroJogadores;
-    private int tempoPartida;
+    private String nome;
+
     @ManyToOne
     @JoinColumn(name="categoria_id")
     private Categoria categoria;
@@ -25,15 +25,13 @@ public class Quadra {
     private Partida partida;
 
 
-    public Quadra(int id, int numeroJogadores, int tempoPartida,List<Endereco> endereco, Categoria categoria,Partida partida,Empresa empresa) {
+    public Quadra(int id,String nome,List<Endereco> endereco, Categoria categoria,Partida partida,Empresa empresa) {
         this.id = id;
-        this.numeroJogadores = numeroJogadores;
-        this.tempoPartida = tempoPartida;
         this.endereco = endereco;
         this.categoria = categoria;
         this.partida = partida;
         this.empresa = empresa;
-
+        this.nome = nome;
 
     }
 
@@ -49,21 +47,7 @@ public class Quadra {
         this.id = id;
     }
 
-    public int getNumeroJogadores() {
-        return numeroJogadores;
-    }
 
-    public void setNumeroJogadores(int numeroJogadores) {
-        this.numeroJogadores = numeroJogadores;
-    }
-
-    public int getTempoPartida() {
-        return tempoPartida;
-    }
-
-    public void setTempoPartida(int tempoPartida) {
-        this.tempoPartida = tempoPartida;
-    }
 
     public Categoria getCategoria() {
         return categoria;
@@ -95,6 +79,14 @@ public class Quadra {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
 

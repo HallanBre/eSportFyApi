@@ -4,6 +4,8 @@ import com.esportfy.esportfyb.entities.Endereco;
 import com.esportfy.esportfyb.entities.Quadra;
 import com.esportfy.esportfyb.entities.Usuario;
 
+import java.util.List;
+
 public class EnderecoDto {
     private int id;
     private String rua;
@@ -12,7 +14,7 @@ public class EnderecoDto {
     private String cidade;
     private String estado;
     private String cep;
-    private Usuario usuario;
+    private List<Usuario> usuario;
     private Quadra quadra;
 
 
@@ -24,7 +26,6 @@ public class EnderecoDto {
         this.bairro = endereco.getBairro();
         this.estado = endereco.getEstado();
         this.cep = endereco.getCep();
-        this.usuario = endereco.getUsuario();
         this.quadra = endereco.getQuadra();
     }
     public EnderecoDto() {
@@ -85,15 +86,6 @@ public class EnderecoDto {
     public void setCep(String cep) {
         this.cep = cep;
     }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Quadra getQuadra() {
         return quadra;
     }
