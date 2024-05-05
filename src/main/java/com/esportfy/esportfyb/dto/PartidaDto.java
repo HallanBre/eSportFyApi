@@ -3,7 +3,10 @@ package com.esportfy.esportfyb.dto;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.entities.Quadra;
 import com.esportfy.esportfyb.entities.Usuario;
+import jakarta.persistence.Column;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +17,8 @@ public class PartidaDto {
     private int numeroJogadores;
     private int tempoPartida;
     private String dataHora;
+    @Column(precision = 10 ,scale = 2)
+    private BigDecimal valor;
     private Quadra quadra;
     private List<Usuario> usuario;
 
@@ -26,6 +31,7 @@ public class PartidaDto {
         this.numeroJogadores = partida.getNumeroJogadores();
         this.tempoPartida = partida.getTempoPartida();
         this.dataHora = partida.getDataHora();
+        this.valor = partida.getValor();
     }
     public PartidaDto() {
     }
@@ -89,8 +95,24 @@ public class PartidaDto {
     public String getData() {
         return dataHora;
     }
-
     public void setData(String data) {
         this.dataHora = data;
+    }
+
+    public String getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(String dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+
+        this.valor = valor;
     }
 }

@@ -3,10 +3,7 @@ package com.esportfy.esportfyb.controller;
 import com.esportfy.esportfyb.dto.PartidaDto;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.service.PartidaService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class PartidaController {
         return partidaService.listaPartida();
     }
     @PostMapping("/salvar")
-    public String cadastro(Partida partida){
+    public String cadastro(@RequestBody Partida partida){
         return partidaService.CadastroPartida(partida);
     }
     @GetMapping("/deletar/{id}")
@@ -33,7 +30,8 @@ public class PartidaController {
         return partidaService.excluiPartida(id);
     }
     @GetMapping("/buscar/{id}")
-    public PartidaDto getObjectId(int id){
+    public PartidaDto getObjectId(@PathVariable int id){
         return partidaService.buscaPartida(id);
     }
+
 }

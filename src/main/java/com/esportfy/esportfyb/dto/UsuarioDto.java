@@ -16,7 +16,7 @@ public class UsuarioDto {
     private String date;
     private UserRole role;
     private List<Endereco> endereco;
-    private Partida partida;
+    private List<Partida> partida;
 
     public UsuarioDto(Usuario usuario) {
         this.id = usuario.getId();
@@ -84,11 +84,11 @@ public class UsuarioDto {
     public int getId() {
         return id;
     }
-    public Partida getPartida() {
+    public List<Partida> getPartida() {
         return partida;
     }
 
-    public void setPartida(Partida partida) {
+    public void setPartida(List<Partida> partida) {
         this.partida = partida;
     }
 }

@@ -1,11 +1,15 @@
 package com.esportfy.esportfyb.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+
 public class Partida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +19,15 @@ public class Partida {
     private int numeroJogadores;
     private int tempoPartida;
     private String dataHora;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal valor;
     @OneToOne(cascade ={CascadeType.ALL})
     @JoinColumn(name="quadra_id")
     private Quadra quadra;
-    @OneToMany(mappedBy = "partida")
+    @ManyToMany(mappedBy = "partida")
     private List<Usuario> usuario;
 
-    public Partida(int id, String descricao, Boolean disponibilidade, int numeroJogadores, int tempoPartida,String dataHora,Quadra quadra, List<Usuario> usuario) {
+    public Partida(int id, String descricao, Boolean disponibilidade, int numeroJogadores, int tempoPartida,String dataHora,Quadra quadra, List<Usuario> usuario, BigDecimal valor) {
         this.id = id;
         this.descricao = descricao;
         this.disponibilidade = disponibilidade;
@@ -30,6 +36,7 @@ public class Partida {
         this.numeroJogadores = numeroJogadores;
         this.tempoPartida = tempoPartida;
         this.dataHora = dataHora;
+        this.valor = valor;
     }
 
 
@@ -98,5 +105,14 @@ public class Partida {
 
     public void setDataHora(String dataHora) {
         this.dataHora = dataHora;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+
+        this.valor = valor;
     }
 }

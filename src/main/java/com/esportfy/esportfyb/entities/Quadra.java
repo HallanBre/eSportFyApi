@@ -24,8 +24,19 @@ public class Quadra {
     @JoinColumn(name="partida_id")
     private Partida partida;
 
+    @Override
+    public String toString() {
+        return "Quadra{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", categoria=" + categoria +
+                ", empresa=" + empresa +
+                ", endereco=" + endereco +
+                ", partida=" + partida +
+                '}';
+    }
 
-    public Quadra(int id,String nome,List<Endereco> endereco, Categoria categoria,Partida partida,Empresa empresa) {
+    public Quadra(int id, String nome, List<Endereco> endereco, Categoria categoria, Partida partida, Empresa empresa) {
         this.id = id;
         this.endereco = endereco;
         this.categoria = categoria;

@@ -22,10 +22,13 @@ public class Usuario implements UserDetails {
     private String password;
     private String date;
     private UserRole role;
-    @ManyToOne(optional = true)
-    @JoinColumn(name="partida_id")
-    private Partida partida = null;
-
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_partida",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "partida_id")
+    )
+    private List<Partida> partida;
 
 
 
@@ -124,11 +127,11 @@ public class Usuario implements UserDetails {
         this.role = role;
     }
 
-    public Partida getPartida() {
+    public List<Partida> getPartida() {
         return partida;
     }
 
-    public void setPartida(Partida partida) {
+    public void setPartida(List<Partida> partida) {
         this.partida = partida;
     }
 }
