@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import session.SessaoSistema;
 
 @RestController
 @RequestMapping(value = "/auth")
@@ -36,8 +37,23 @@ public class AuthenticationController {
 
         var token = tokenService.generateToken((Usuario) auth.getPrincipal());
 
+        Usuario usuarioAutenticado = (Usuario) auth.getPrincipal();
+
+        SessaoSistema.getInstance().setUsuarioLogado(usuarioAutenticado);
+        /*.setUsuario(usuarioRepository.findById(SessaoSistema.getInstance().getUsuarioLogado().getId()).get());*/
+
         return ResponseEntity.ok(new LoginResponseDto(token));
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout() {
+
+        SessaoSistema.getInstance().setUsuarioLogado(null);
+
+        return ResponseEntity.ok().build();
+    }
+
+
 
     @PostMapping("/cadastro")
     public ResponseEntity cadastro(@RequestBody @Validated RegisterDto data){
@@ -50,5 +66,6 @@ public class AuthenticationController {
 
         return ResponseEntity.ok().build();
     }
+
 
 }
