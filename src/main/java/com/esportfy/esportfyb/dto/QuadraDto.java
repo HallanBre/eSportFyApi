@@ -8,10 +8,11 @@ public class QuadraDto {
 
     private int id;
     private String nome;
+    private String detalheEndereco;
     private Categoria categoria;
     private Empresa empresa;
-    private List<Endereco> endereco;
-    private Partida partida;
+    private Endereco endereco;
+    private List<Partida> partida;
 
 
 
@@ -22,6 +23,7 @@ public class QuadraDto {
         this.partida = quadra.getPartida();
         this.empresa = quadra.getEmpresa();
         this.nome = quadra.getNome();
+        this.detalheEndereco = quadra.getDetalheEndereco();
     }
     public QuadraDto() {
     }
@@ -52,19 +54,19 @@ public class QuadraDto {
         this.empresa = empresa;
     }
 
-    public List<Endereco> getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(List<Endereco> endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
-    public Partida getPartida() {
+    public List<Partida> getPartida() {
         return partida;
     }
 
-    public void setPartida(Partida partida) {
+    public void setPartida(List<Partida> partida) {
         this.partida = partida;
     }
 
@@ -74,5 +76,13 @@ public class QuadraDto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDetalheEndereco() {
+        return detalheEndereco;
+    }
+
+    public void setDetalheEndereco(String detalheEndereco) {
+        this.detalheEndereco = detalheEndereco;
     }
 }

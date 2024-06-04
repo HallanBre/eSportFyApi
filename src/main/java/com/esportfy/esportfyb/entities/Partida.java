@@ -1,5 +1,7 @@
 package com.esportfy.esportfyb.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
@@ -21,8 +23,9 @@ public class Partida {
     private String dataHora;
     @Column(precision = 10, scale = 2)
     private BigDecimal valor;
-    @OneToOne(cascade ={CascadeType.ALL})
+    @ManyToOne(cascade ={CascadeType.ALL})
     @JoinColumn(name="quadra_id")
+    @JsonBackReference
     private Quadra quadra;
     @ManyToMany(mappedBy = "partida")
     private List<Usuario> usuario;

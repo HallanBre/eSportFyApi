@@ -1,5 +1,7 @@
 package com.esportfy.esportfyb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,18 +13,18 @@ public class Quadra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
-
+    private String detalheEndereco;
     @ManyToOne
     @JoinColumn(name="categoria_id")
     private Categoria categoria;
     @ManyToOne
     private Empresa empresa;
-    @OneToMany(cascade ={CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name="endereco_id")
-    private List<Endereco> endereco;
-    @OneToOne(cascade ={CascadeType.ALL})
-    @JoinColumn(name="partida_id")
-    private Partida partida;
+    private Endereco endereco;
+    @OneToMany(cascade ={CascadeType.ALL}, mappedBy ="quadra")
+    @JsonManagedReference
+    private List<Partida> partida;
 
     @Override
     public String toString() {
@@ -36,13 +38,14 @@ public class Quadra {
                 '}';
     }
 
-    public Quadra(int id, String nome, List<Endereco> endereco, Categoria categoria, Partida partida, Empresa empresa) {
+    public Quadra(int id, String nome, Endereco endereco, Categoria categoria, List<Partida> partida, Empresa empresa, String detalheEndereco) {
         this.id = id;
         this.endereco = endereco;
         this.categoria = categoria;
         this.partida = partida;
         this.empresa = empresa;
         this.nome = nome;
+        this.detalheEndereco = detalheEndereco;
 
     }
 
@@ -68,19 +71,19 @@ public class Quadra {
         this.categoria = categoria;
     }
 
-    public List<Endereco> getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(List<Endereco> endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
-    public Partida getPartida() {
+    public List<Partida> getPartida() {
         return partida;
     }
 
-    public void setPartida(Partida partida) {
+    public void setPartida(List<Partida> partida) {
         this.partida = partida;
     }
 
@@ -98,6 +101,14 @@ public class Quadra {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDetalheEndereco() {
+        return detalheEndereco;
+    }
+
+    public void setDetalheEndereco(String detalheEndereco) {
+        this.detalheEndereco = detalheEndereco;
     }
 }
 

@@ -9,27 +9,21 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String rua;
-    private int numero;
-    private String bairro;
-    private String cidade;
-    private String estado;
-    private String cep;
-    @ManyToOne(cascade ={CascadeType.ALL})
-    private Quadra quadra;
+    private int codigo;
+    private String nome;
+    private String uf;
+    @OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL)
+    private List<Quadra> quadras;
 
 
 
 
-    public Endereco(int id, String rua, int numero, String cidade, String bairro, String estado, String cep) {
+    public Endereco(int id, int codigo, String nome, String uf, List<Quadra> quadras) {
         this.id = id;
-        this.rua = rua;
-        this.numero = numero;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.estado = estado;
-        this.cep = cep;
-
+        this.codigo = codigo;
+        this.nome = nome;
+        this.uf = uf;
+        this.quadras = quadras;
     }
 
     public Endereco() {
@@ -44,58 +38,35 @@ public class Endereco {
         this.id = id;
     }
 
-    public int getNumero() {
-        return numero;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public String getRua() {
-        return rua;
+    public String getNome() {
+        return nome;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getBairro() {
-        return bairro;
+    public String getUf() {
+        return uf;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
-    public String getCidade() {
-        return cidade;
+    public List<Quadra> getQuadras() {
+        return quadras;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-    public Quadra getQuadra() {
-        return quadra;
-    }
-
-    public void setQuadra(Quadra quadra) {
-        this.quadra = quadra;
+    public void setQuadras(List<Quadra> quadras) {
+        this.quadras = quadras;
     }
 }

@@ -38,7 +38,9 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/partida/lista").permitAll()
                         .requestMatchers(HttpMethod.POST, "/partida/salvar").permitAll()
                         .requestMatchers(HttpMethod.GET, "/partida/buscar/{id}").permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers(HttpMethod.GET, "/endereco/lista").permitAll()
+
+                        .anyRequest().permitAll()) //mudar para authenticat
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
