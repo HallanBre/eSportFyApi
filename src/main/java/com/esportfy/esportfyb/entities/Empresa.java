@@ -1,5 +1,6 @@
 package com.esportfy.esportfyb.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Empresa {
     private String email;
     @OneToMany
     @JoinColumn(name="quadra_id")
+    @JsonManagedReference
     private List<Quadra> quadra;
 
     public Empresa(int id, String razaoSocial, String nome, String cnpj, String contato, String email, List<Quadra> quadra) {

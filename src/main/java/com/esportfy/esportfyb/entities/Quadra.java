@@ -1,12 +1,17 @@
 package com.esportfy.esportfyb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Quadra {
 
     @Id
@@ -18,6 +23,7 @@ public class Quadra {
     @JoinColumn(name="categoria_id")
     private Categoria categoria;
     @ManyToOne
+    @JsonManagedReference
     private Empresa empresa;
     @ManyToOne
     @JoinColumn(name="endereco_id")

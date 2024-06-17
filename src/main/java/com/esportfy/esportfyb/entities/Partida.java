@@ -2,6 +2,7 @@ package com.esportfy.esportfyb.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
@@ -28,6 +29,7 @@ public class Partida {
     @JsonBackReference
     private Quadra quadra;
     @ManyToMany(mappedBy = "partida")
+    @JsonManagedReference
     private List<Usuario> usuario;
 
     public Partida(int id, String descricao, Boolean disponibilidade, int numeroJogadores, int tempoPartida,String dataHora,Quadra quadra, List<Usuario> usuario, BigDecimal valor) {

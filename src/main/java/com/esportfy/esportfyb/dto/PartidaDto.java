@@ -3,6 +3,7 @@ package com.esportfy.esportfyb.dto;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.entities.Quadra;
 import com.esportfy.esportfyb.entities.Usuario;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
@@ -20,6 +21,7 @@ public class PartidaDto {
     @Column(precision = 10 ,scale = 2)
     private BigDecimal valor;
     private Quadra quadra;
+    @JsonManagedReference
     private List<Usuario> usuario;
 
     public PartidaDto(Partida partida) {

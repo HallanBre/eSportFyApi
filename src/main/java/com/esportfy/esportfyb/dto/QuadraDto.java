@@ -1,6 +1,7 @@
 package com.esportfy.esportfyb.dto;
 
 import com.esportfy.esportfyb.entities.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class QuadraDto {
     private Categoria categoria;
     private Empresa empresa;
     private Endereco endereco;
+    @JsonManagedReference
     private List<Partida> partida;
 
 

@@ -4,6 +4,7 @@ import com.esportfy.esportfyb.dto.PartidaDto;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.repository.PartidaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class PartidaService {
         this.repository = repository;
     }
 
-    public String CadastroPartida(Partida partida){
+    public String CadastroPartida(@RequestBody Partida partida){
         repository.save(partida);
         return "";
     }

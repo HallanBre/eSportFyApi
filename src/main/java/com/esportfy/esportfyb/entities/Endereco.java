@@ -1,10 +1,15 @@
 package com.esportfy.esportfyb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

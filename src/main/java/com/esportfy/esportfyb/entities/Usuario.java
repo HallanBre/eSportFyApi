@@ -2,6 +2,7 @@ package com.esportfy.esportfyb.entities;
 
 
 import com.esportfy.esportfyb.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,6 +29,7 @@ public class Usuario implements UserDetails {
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "partida_id")
     )
+    @JsonBackReference
     private List<Partida> partida;
 
 

@@ -4,6 +4,7 @@ import com.esportfy.esportfyb.entities.Endereco;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.entities.Usuario;
 import com.esportfy.esportfyb.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class UsuarioDto {
     private String date;
     private UserRole role;
     private List<Endereco> endereco;
+    @JsonBackReference
     private List<Partida> partida;
 
     public UsuarioDto(Usuario usuario) {
