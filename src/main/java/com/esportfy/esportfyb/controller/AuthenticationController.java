@@ -17,10 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import session.SessaoSistema;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthenticationController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -35,9 +40,25 @@ public class AuthenticationController {
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((Usuario) auth.getPrincipal());
-        var user = (Usuario) auth.getPrincipal();
+        Usuario usuarioAutenticado = (Usuario) auth.getPrincipal();
 
-        return ResponseEntity.ok(new LoginResponseDto(user));
+        SessaoSistema.getInstance().setUsuarioLogado(usuarioAutenticado);
+        /*.setUsuario(usuarioRepository.findById(SessaoSistema.getInstance().getUsuarioLogado().getId()).get());*/
+
+        if (SessaoSistema.getInstance().getUsuarioLogado() != null) {
+            logger.info("Usuário logado: " + SessaoSistema.getInstance().getUsuarioLogado().getUsername());
+        } else {
+            logger.error("Nenhum usuário na sessão");
+        }
+        return ResponseEntity.ok(new LoginResponseDto(token));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout() {
+
+        SessaoSistema.getInstance().setUsuarioLogado(null);
+
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/cadastro")

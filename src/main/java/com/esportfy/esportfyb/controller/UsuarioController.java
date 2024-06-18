@@ -18,13 +18,7 @@ public class UsuarioController {
         this.service = service;
     }
 
-    //JA Existe em outra classe
 
-//    @PostMapping("/cadastro")
-//    public @ResponseBody String cadastro(@RequestBody Usuario usuario){
-//        System.out.println("Usuario: " + usuario);
-//        return service.salvar(usuario);
-//    }
 
     @GetMapping("/excluir/{id}")
     public String excluirUsuario(@PathVariable("id") int id){

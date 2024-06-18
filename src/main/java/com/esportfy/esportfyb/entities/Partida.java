@@ -26,10 +26,8 @@ public class Partida {
     private BigDecimal valor;
     @ManyToOne(cascade ={CascadeType.ALL})
     @JoinColumn(name="quadra_id")
-    @JsonBackReference
     private Quadra quadra;
     @ManyToMany(mappedBy = "partida")
-    @JsonManagedReference
     private List<Usuario> usuario;
 
     public Partida(int id, String descricao, Boolean disponibilidade, int numeroJogadores, int tempoPartida,String dataHora,Quadra quadra, List<Usuario> usuario, BigDecimal valor) {

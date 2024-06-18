@@ -17,7 +17,7 @@ public class PartidaService {
         this.repository = repository;
     }
 
-    public String CadastroPartida(@RequestBody Partida partida){
+    public String CadastroPartida( Partida partida){
         repository.save(partida);
         return "";
     }

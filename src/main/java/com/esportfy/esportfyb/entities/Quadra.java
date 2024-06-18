@@ -1,9 +1,6 @@
 package com.esportfy.esportfyb.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -23,13 +20,11 @@ public class Quadra {
     @JoinColumn(name="categoria_id")
     private Categoria categoria;
     @ManyToOne
-    @JsonManagedReference
     private Empresa empresa;
     @ManyToOne
     @JoinColumn(name="endereco_id")
     private Endereco endereco;
     @OneToMany(cascade ={CascadeType.ALL}, mappedBy ="quadra")
-    @JsonManagedReference
     private List<Partida> partida;
 
     @Override

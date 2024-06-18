@@ -23,6 +23,8 @@ public class PartidaController {
     }
     @PostMapping("/salvar")
     public String cadastro(@RequestBody Partida partida){
+
+        System.out.println(partida +"passou");
         return partidaService.CadastroPartida(partida);
     }
     @GetMapping("/deletar/{id}")

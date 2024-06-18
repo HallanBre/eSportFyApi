@@ -29,7 +29,6 @@ public class Usuario implements UserDetails {
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "partida_id")
     )
-    @JsonBackReference
     private List<Partida> partida;
 
 
