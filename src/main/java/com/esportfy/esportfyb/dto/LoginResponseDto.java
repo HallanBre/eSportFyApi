@@ -1,4 +1,4 @@
 package com.esportfy.esportfyb.dto;
 
-public record LoginResponseDto (String token){
+public record LoginResponseDto (com.esportfy.esportfyb.entities.Usuario user, String token){
 }

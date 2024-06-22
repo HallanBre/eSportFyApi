@@ -3,11 +3,12 @@ package com.esportfy.esportfyb.service;
 import com.esportfy.esportfyb.dto.PartidaDto;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.entities.Quadra;
+import com.esportfy.esportfyb.entities.Usuario;
 import com.esportfy.esportfyb.repository.PartidaRepository;
 import com.esportfy.esportfyb.repository.QuadraRepository;
+import com.esportfy.esportfyb.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,11 +19,18 @@ public class PartidaService {
     final
     QuadraRepository quadraRepository;
 
+
     private final PartidaRepository repository;
-    public PartidaService(PartidaRepository repository, QuadraRepository quadraRepository) {
+
+    private final UsuarioRepository usuarioRepository; // Injete o repositório, não a entidade
+
+    @Autowired
+    public PartidaService(PartidaRepository repository, QuadraRepository quadraRepository, UsuarioRepository usuarioRepository) {
         this.repository = repository;
         this.quadraRepository = quadraRepository;
+        this.usuarioRepository = usuarioRepository;
     }
+
 
     public String CadastroPartida( Partida partida){
         Quadra quadra = quadraRepository.findById(partida.getQuadra().getId());
@@ -43,4 +51,14 @@ public class PartidaService {
         List<Partida> partidas = repository.findAll();
         return partidas.stream().map(x -> new PartidaDto(x)).collect(Collectors.toList());
     }
+
+    public String participarPartida(int id, int usuarioId){
+        Partida partida = repository.findById(id);
+        Usuario usuario = usuarioRepository.findById(usuarioId); // Busque o usuário usando o repositório
+        partida.adicionarUsuario(usuario);
+        repository.save(partida);
+        return "";
+    }
+
+
 }

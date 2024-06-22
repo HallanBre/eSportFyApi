@@ -5,6 +5,7 @@ import com.esportfy.esportfyb.entities.Usuario;
 import com.esportfy.esportfyb.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,9 +26,19 @@ public class UsuarioController {
         return service.excluirUsuario(id);
     }
 
-    @GetMapping("/buscaId/{id}")
-    public UsuarioDto getUsuario(@PathVariable("id") int id){
-        return service.buscaUsuario(id);
+    @GetMapping("/buscaId/{ids}")
+    public List<UsuarioDto> getUsuarios(@PathVariable("ids") String ids){
+        String[] idArray = ids.split(",");
+        List<UsuarioDto> usuarios = new ArrayList<>();
+        for (String idString : idArray) {
+            try {
+                int id = Integer.parseInt(idString);
+                usuarios.add(service.buscaUsuario(id));
+            } catch (NumberFormatException e) {
+                // Trate o caso em que a string não pode ser convertida para um inteiro
+            }
+        }
+        return usuarios;
     }
 
     @GetMapping("/lista")

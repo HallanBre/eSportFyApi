@@ -39,6 +39,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/partida/salvar").permitAll()
                         .requestMatchers(HttpMethod.GET, "/partida/buscar/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/endereco/lista").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/usuario/buscaId/{id}").permitAll()
 
                         .anyRequest().permitAll()) //mudar para authenticat
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

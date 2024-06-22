@@ -1,18 +1,17 @@
 package com.esportfy.esportfyb.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Partida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,19 +26,32 @@ public class Partida {
     @ManyToOne(cascade ={CascadeType.ALL})
     @JoinColumn(name="quadra_id")
     private Quadra quadra;
-    @ManyToMany(mappedBy = "partida")
-    private List<Usuario> usuario;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "partida_usuario",
+            joinColumns = @JoinColumn(name = "partida_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+    private List<Usuario> usuarios;
 
     public Partida(int id, String descricao, Boolean disponibilidade, int numeroJogadores, int tempoPartida,String dataHora,Quadra quadra, List<Usuario> usuario, BigDecimal valor) {
         this.id = id;
         this.descricao = descricao;
         this.disponibilidade = disponibilidade;
         this.quadra = quadra;
-        this.usuario = usuario;
+        this.usuarios = usuario;
         this.numeroJogadores = numeroJogadores;
         this.tempoPartida = tempoPartida;
         this.dataHora = dataHora;
         this.valor = valor;
+    }
+
+    public void adicionarUsuario(Usuario usuario) {
+        if (this.usuarios == null) {
+            this.usuarios = new ArrayList<>();
+        }
+        this.usuarios.add(usuario);
     }
 
 
@@ -79,11 +91,11 @@ public class Partida {
     }
 
     public List<Usuario> getUsuario() {
-        return usuario;
+        return usuarios;
     }
 
     public void setUsuario(List<Usuario> usuario) {
-        this.usuario = usuario;
+        this.usuarios = usuario;
     }
 
     public int getNumeroJogadores() {

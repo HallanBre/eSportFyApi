@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,14 @@ public class PartidaDto {
         this.tempoPartida = partida.getTempoPartida();
         this.dataHora = partida.getDataHora();
         this.valor = partida.getValor();
+    }
+
+
+    public void adicionarUsuario(Usuario usuario) {
+        if (this.usuario == null) {
+            this.usuario = new ArrayList<>();
+        }
+        this.usuario.add(usuario);
     }
     public PartidaDto() {
     }

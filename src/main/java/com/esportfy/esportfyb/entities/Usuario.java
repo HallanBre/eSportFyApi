@@ -3,6 +3,8 @@ package com.esportfy.esportfyb.entities;
 
 import com.esportfy.esportfyb.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Table(name = "usuarios")
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Usuario implements UserDetails {
 
     @Id
@@ -23,13 +26,10 @@ public class Usuario implements UserDetails {
     private String password;
     private String date;
     private UserRole role;
-    @ManyToMany
-    @JoinTable(
-            name = "usuario_partida",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "partida_id")
-    )
-    private List<Partida> partida;
+
+    @JsonBackReference
+    @ManyToMany(mappedBy = "usuarios")
+    private List<Partida> partidas;
 
 
 
@@ -129,11 +129,11 @@ public class Usuario implements UserDetails {
     }
 
     public List<Partida> getPartida() {
-        return partida;
+        return partidas;
     }
 
     public void setPartida(List<Partida> partida) {
-        this.partida = partida;
+        this.partidas = partida;
     }
 }
 

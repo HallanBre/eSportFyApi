@@ -21,6 +21,8 @@ public class UsuarioService {
     }
 
     public UsuarioDto buscaUsuario(int id){
+
+
         Usuario usuario = repository.findById(id);
         UsuarioDto dto = new UsuarioDto(usuario);
         return dto;

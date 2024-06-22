@@ -2,8 +2,12 @@ package com.esportfy.esportfyb.controller;
 
 import com.esportfy.esportfyb.dto.PartidaDto;
 import com.esportfy.esportfyb.entities.Partida;
+import com.esportfy.esportfyb.entities.Usuario;
 import com.esportfy.esportfyb.service.PartidaService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import session.SessaoSistema;
 
 import java.util.List;
 
@@ -25,6 +29,16 @@ public class PartidaController {
     public String cadastro(@RequestBody Partida partida){
         return partidaService.CadastroPartida(partida);
     }
+
+    @PostMapping("/participar/{id}")
+        public String participar(@PathVariable int id){
+            Usuario usuario = SessaoSistema.getInstance().getUsuarioLogado();
+            return partidaService.participarPartida(id, usuario.getId());
+        }
+
+
+
+
     @GetMapping("/deletar/{id}")
     public String deletarPartida(int id){
         return partidaService.excluiPartida(id);
