@@ -35,7 +35,7 @@ public class UsuarioController {
                 int id = Integer.parseInt(idString);
                 usuarios.add(service.buscaUsuario(id));
             } catch (NumberFormatException e) {
-                // Trate o caso em que a string não pode ser convertida para um inteiro
+                System.out.println("Erro ao converter id: " + idString);
             }
         }
         return usuarios;

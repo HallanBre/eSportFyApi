@@ -9,6 +9,7 @@ import com.esportfy.esportfyb.repository.QuadraRepository;
 import com.esportfy.esportfyb.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import session.SessaoSistema;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,12 +53,23 @@ public class PartidaService {
         return partidas.stream().map(x -> new PartidaDto(x)).collect(Collectors.toList());
     }
 
+    public List<Partida> getPartidasDoUsuarioLogado() {
+        Usuario usuarioLogado = SessaoSistema.getInstance().getUsuarioLogado();
+        return repository.findByUsuario(usuarioLogado);
+    }
+
     public String participarPartida(int id, int usuarioId){
         Partida partida = repository.findById(id);
-        Usuario usuario = usuarioRepository.findById(usuarioId); // Busque o usuário usando o repositório
+        Usuario usuario = usuarioRepository.findById(usuarioId);
+
+        // Verifica se o usuário já está cadastrado na partida
+        if (partida.getUsuario().contains(usuario)) {
+            return "Erro: Usuário já está cadastrado na partida";
+        }
+
         partida.adicionarUsuario(usuario);
         repository.save(partida);
-        return "";
+        return "Usuário cadastrado com sucesso na partida";
     }
 
 

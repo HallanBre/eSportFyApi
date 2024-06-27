@@ -25,6 +25,12 @@ public class PartidaController {
     public List<PartidaDto> listaPartida(){
         return partidaService.listaPartida();
     }
+
+    @GetMapping("/partidasUsuario")
+    public List<Partida> getPartidasDoUsuarioLogado() {
+        return partidaService.getPartidasDoUsuarioLogado();
+    }
+
     @PostMapping("/salvar")
     public String cadastro(@RequestBody Partida partida){
         return partidaService.CadastroPartida(partida);

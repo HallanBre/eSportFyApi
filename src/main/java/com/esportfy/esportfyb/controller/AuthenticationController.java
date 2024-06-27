@@ -60,8 +60,9 @@ public class AuthenticationController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/Session")
+    @GetMapping("/session")
     public ResponseEntity<Usuario> session() {
+        System.out.println("USUARIO SESSAO0---------------" + SessaoSistema.getInstance().getUsuarioLogado().toString());
         return ResponseEntity.ok(SessaoSistema.getInstance().getUsuarioLogado());
     }
 

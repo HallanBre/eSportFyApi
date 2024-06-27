@@ -40,6 +40,15 @@ public class Usuario implements UserDetails {
     }
 
     @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    @Override
     public String getPassword() {
         return password;
     }

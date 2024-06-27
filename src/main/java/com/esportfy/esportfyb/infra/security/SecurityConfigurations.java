@@ -40,6 +40,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/partida/buscar/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/endereco/lista").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuario/buscaId/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/auth/session").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/partida/partidasUsuario").permitAll()
 
                         .anyRequest().permitAll()) //mudar para authenticat
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
