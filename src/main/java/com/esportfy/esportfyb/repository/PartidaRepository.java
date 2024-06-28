@@ -14,4 +14,7 @@ public interface PartidaRepository extends JpaRepository<Partida, Integer> {
 
     @Query("SELECT p FROM Partida p JOIN p.usuarios u WHERE u = :usuario")
     List<Partida> findByUsuario(Usuario usuario);
+
+    @Query("SELECT p FROM Partida p WHERE p.disponibilidade = true")
+    List<Partida> findByDisponivelTrue();
 }

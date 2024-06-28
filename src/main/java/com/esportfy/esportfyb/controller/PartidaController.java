@@ -20,31 +20,23 @@ public class PartidaController {
     public PartidaController(PartidaService partidaService) {
         this.partidaService = partidaService;
     }
-
     @GetMapping("/lista")
     public List<PartidaDto> listaPartida(){
         return partidaService.listaPartida();
     }
-
     @GetMapping("/partidasUsuario")
-    public List<Partida> getPartidasDoUsuarioLogado() {
+    public List<PartidaDto> getPartidasDoUsuarioLogado() {
         return partidaService.getPartidasDoUsuarioLogado();
     }
-
     @PostMapping("/salvar")
     public String cadastro(@RequestBody Partida partida){
         return partidaService.CadastroPartida(partida);
     }
-
     @PostMapping("/participar/{id}")
         public String participar(@PathVariable int id){
             Usuario usuario = SessaoSistema.getInstance().getUsuarioLogado();
             return partidaService.participarPartida(id, usuario.getId());
         }
-
-
-
-
     @GetMapping("/deletar/{id}")
     public String deletarPartida(int id){
         return partidaService.excluiPartida(id);

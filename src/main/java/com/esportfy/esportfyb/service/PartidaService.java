@@ -49,24 +49,26 @@ public class PartidaService {
         return dto;
     }
     public List<PartidaDto> listaPartida(){
-        List<Partida> partidas = repository.findAll();
+        List<Partida> partidas = repository.findByDisponivelTrue();
         return partidas.stream().map(x -> new PartidaDto(x)).collect(Collectors.toList());
     }
 
-    public List<Partida> getPartidasDoUsuarioLogado() {
+    public List<PartidaDto> getPartidasDoUsuarioLogado() {
         Usuario usuarioLogado = SessaoSistema.getInstance().getUsuarioLogado();
-        return repository.findByUsuario(usuarioLogado);
+        List<Partida> partidas = repository.findByUsuario(usuarioLogado);
+        return partidas.stream().map(x -> new PartidaDto(x)).collect(Collectors.toList());
     }
 
     public String participarPartida(int id, int usuarioId){
         Partida partida = repository.findById(id);
         Usuario usuario = usuarioRepository.findById(usuarioId);
-
-        // Verifica se o usuário já está cadastrado na partida
-        if (partida.getUsuario().contains(usuario)) {
+        if(partida.getNumeroJogadores() == partida.getUsuario().toArray().length){
+            partida.setDisponibilidade(false);
+            repository.save(partida);
+            return "Usuário cadastrado com sucesso na partida";
+        }else if (partida.getUsuario().contains(usuario)) {
             return "Erro: Usuário já está cadastrado na partida";
         }
-
         partida.adicionarUsuario(usuario);
         repository.save(partida);
         return "Usuário cadastrado com sucesso na partida";

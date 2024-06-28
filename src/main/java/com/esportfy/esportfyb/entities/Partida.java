@@ -27,7 +27,7 @@ public class Partida {
     @JoinColumn(name="quadra_id")
     private Quadra quadra;
 
-
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name = "partida_usuario",
