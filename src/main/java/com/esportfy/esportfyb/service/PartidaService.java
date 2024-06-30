@@ -1,6 +1,7 @@
 package com.esportfy.esportfyb.service;
 
 import com.esportfy.esportfyb.dto.PartidaDto;
+import com.esportfy.esportfyb.entities.Endereco;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.entities.Quadra;
 import com.esportfy.esportfyb.entities.Usuario;
@@ -22,13 +23,14 @@ public class PartidaService {
 
 
     private final PartidaRepository repository;
-
+    private final Endereco enderecoRepository;
     private final UsuarioRepository usuarioRepository; // Injete o repositório, não a entidade
 
     @Autowired
-    public PartidaService(PartidaRepository repository, QuadraRepository quadraRepository, UsuarioRepository usuarioRepository) {
+    public PartidaService(PartidaRepository repository, QuadraRepository quadraRepository, Endereco enderecoRepository, UsuarioRepository usuarioRepository) {
         this.repository = repository;
         this.quadraRepository = quadraRepository;
+        this.enderecoRepository = enderecoRepository;
         this.usuarioRepository = usuarioRepository;
     }
 
@@ -62,8 +64,9 @@ public class PartidaService {
     public String participarPartida(int id, int usuarioId){
         Partida partida = repository.findById(id);
         Usuario usuario = usuarioRepository.findById(usuarioId);
-        if(partida.getNumeroJogadores() == partida.getUsuario().toArray().length){
+        if((partida.getNumeroJogadores()-1) == partida.getUsuario().toArray().length){
             partida.setDisponibilidade(false);
+            partida.adicionarUsuario(usuario);
             repository.save(partida);
             return "Usuário cadastrado com sucesso na partida";
         }else if (partida.getUsuario().contains(usuario)) {
@@ -73,6 +76,9 @@ public class PartidaService {
         repository.save(partida);
         return "Usuário cadastrado com sucesso na partida";
     }
+
+
+
 
 
 }

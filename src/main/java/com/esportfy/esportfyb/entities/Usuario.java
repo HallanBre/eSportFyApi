@@ -27,7 +27,7 @@ public class Usuario implements UserDetails {
     private String date;
     private UserRole role;
 
-    @JsonBackReference
+
     @ManyToMany(mappedBy = "usuarios")
     private List<Partida> partidas;
 

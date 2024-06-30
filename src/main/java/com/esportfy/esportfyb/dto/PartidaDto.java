@@ -3,6 +3,8 @@ package com.esportfy.esportfyb.dto;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.entities.Quadra;
 import com.esportfy.esportfyb.entities.Usuario;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 
