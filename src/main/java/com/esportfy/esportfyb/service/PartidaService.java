@@ -5,6 +5,7 @@ import com.esportfy.esportfyb.entities.Endereco;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.entities.Quadra;
 import com.esportfy.esportfyb.entities.Usuario;
+import com.esportfy.esportfyb.repository.EnderecoRepository;
 import com.esportfy.esportfyb.repository.PartidaRepository;
 import com.esportfy.esportfyb.repository.QuadraRepository;
 import com.esportfy.esportfyb.repository.UsuarioRepository;
@@ -23,11 +24,11 @@ public class PartidaService {
 
 
     private final PartidaRepository repository;
-    private final Endereco enderecoRepository;
+    private final EnderecoRepository enderecoRepository;
     private final UsuarioRepository usuarioRepository; // Injete o repositório, não a entidade
 
     @Autowired
-    public PartidaService(PartidaRepository repository, QuadraRepository quadraRepository, Endereco enderecoRepository, UsuarioRepository usuarioRepository) {
+    public PartidaService(PartidaRepository repository, QuadraRepository quadraRepository, EnderecoRepository enderecoRepository, UsuarioRepository usuarioRepository) {
         this.repository = repository;
         this.quadraRepository = quadraRepository;
         this.enderecoRepository = enderecoRepository;
@@ -75,6 +76,11 @@ public class PartidaService {
         partida.adicionarUsuario(usuario);
         repository.save(partida);
         return "Usuário cadastrado com sucesso na partida";
+    }
+
+    public List<PartidaDto> listaPartidasPorMunicipioId(int municipioId){
+        List<Partida> partidas = repository.findByMunicipioId(municipioId);
+        return partidas.stream().map(PartidaDto::new).collect(Collectors.toList());
     }
 
 

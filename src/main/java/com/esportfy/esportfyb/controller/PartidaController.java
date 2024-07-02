@@ -3,6 +3,7 @@ package com.esportfy.esportfyb.controller;
 import com.esportfy.esportfyb.dto.PartidaDto;
 import com.esportfy.esportfyb.entities.Partida;
 import com.esportfy.esportfyb.entities.Usuario;
+import com.esportfy.esportfyb.repository.EnderecoRepository;
 import com.esportfy.esportfyb.service.PartidaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,10 @@ public class PartidaController {
 
     final PartidaService partidaService;
 
+
     public PartidaController(PartidaService partidaService) {
         this.partidaService = partidaService;
+
     }
     @GetMapping("/lista")
     public List<PartidaDto> listaPartida(){
@@ -46,4 +49,9 @@ public class PartidaController {
         return partidaService.buscaPartida(id);
     }
 
+    @GetMapping("/municipio/{municipioId}")
+    public ResponseEntity<List<PartidaDto>> getPartidasPorMunicipio(@PathVariable int municipioId) {
+        List<PartidaDto> partidas = partidaService.listaPartidasPorMunicipioId(municipioId);
+        return ResponseEntity.ok(partidas);
+    }
 }
