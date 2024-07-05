@@ -47,6 +47,7 @@ public class Partida {
         this.valor = valor;
     }
 
+
     public void adicionarUsuario(Usuario usuario) {
         if (this.usuarios == null) {
             this.usuarios = new ArrayList<>();

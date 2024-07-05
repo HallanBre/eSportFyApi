@@ -54,4 +54,14 @@ public class PartidaController {
         List<PartidaDto> partidas = partidaService.listaPartidasPorMunicipioId(municipioId);
         return ResponseEntity.ok(partidas);
     }
+
+    @GetMapping("/partidasEmpresa")
+    public List<PartidaDto> getPartidasDaEmpresaDoUsuarioLogado() {
+        return partidaService.getPartidasDaEmpresaDoUsuarioLogado();
+    }
+
+    @DeleteMapping("/sair/{id}")
+    public String sairPartida(@PathVariable int id){
+        return partidaService.sairPartida(id);
+    }
 }

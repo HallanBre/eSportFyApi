@@ -26,8 +26,8 @@ public class Usuario implements UserDetails {
     private String password;
     private String date;
     private UserRole role;
-
-
+    @OneToOne
+    private Empresa empresa;
     @ManyToMany(mappedBy = "usuarios")
     private List<Partida> partidas;
 
@@ -38,6 +38,7 @@ public class Usuario implements UserDetails {
         if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),new SimpleGrantedAuthority("ROLE_USER"));
             else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
+
 
     @Override
     public String toString() {
@@ -143,6 +144,13 @@ public class Usuario implements UserDetails {
 
     public void setPartida(List<Partida> partida) {
         this.partidas = partida;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 }
 

@@ -2,11 +2,14 @@ package com.esportfy.esportfyb.service;
 
 
 import com.esportfy.esportfyb.dto.QuadraDto;
+import com.esportfy.esportfyb.entities.Empresa;
 import com.esportfy.esportfyb.entities.Quadra;
+import com.esportfy.esportfyb.entities.Usuario;
 import com.esportfy.esportfyb.repository.CategoriaRepository;
 import com.esportfy.esportfyb.repository.QuadraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import session.SessaoSistema;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,9 @@ public class QuadraService {
 
 
     public String CadastroQuadra(Quadra quadra){
+        Usuario usuario = SessaoSistema.getInstance().getUsuarioLogado();
+        Empresa empresa = usuario.getEmpresa();
+        quadra.setEmpresa(empresa);
         repository.save(quadra);
         return "";
     }

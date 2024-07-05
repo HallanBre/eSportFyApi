@@ -26,7 +26,7 @@ public class QuadraController {
 
     @PostMapping("/salvar")
     public String cadastro(@RequestBody Quadra quadra){
-        System.out.println(quadra +"passou");
+
         return quadraService.CadastroQuadra(quadra);
     }
     @GetMapping("/deletar/{id}")

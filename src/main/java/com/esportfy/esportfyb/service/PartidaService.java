@@ -1,16 +1,14 @@
 package com.esportfy.esportfyb.service;
 
 import com.esportfy.esportfyb.dto.PartidaDto;
-import com.esportfy.esportfyb.entities.Endereco;
-import com.esportfy.esportfyb.entities.Partida;
-import com.esportfy.esportfyb.entities.Quadra;
-import com.esportfy.esportfyb.entities.Usuario;
+import com.esportfy.esportfyb.entities.*;
 import com.esportfy.esportfyb.repository.EnderecoRepository;
 import com.esportfy.esportfyb.repository.PartidaRepository;
 import com.esportfy.esportfyb.repository.QuadraRepository;
 import com.esportfy.esportfyb.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import session.SessaoSistema;
 
 import java.util.List;
@@ -62,6 +60,13 @@ public class PartidaService {
         return partidas.stream().map(x -> new PartidaDto(x)).collect(Collectors.toList());
     }
 
+    public List<PartidaDto> getPartidasDaEmpresaDoUsuarioLogado() {
+        Usuario usuarioLogado = SessaoSistema.getInstance().getUsuarioLogado();
+        Empresa empresa = usuarioLogado.getEmpresa();
+        List<Partida> partidas = repository.findByEmpresa(empresa);
+        return partidas.stream().map(x -> new PartidaDto(x)).collect(Collectors.toList());
+    }
+
     public String participarPartida(int id, int usuarioId){
         Partida partida = repository.findById(id);
         Usuario usuario = usuarioRepository.findById(usuarioId);
@@ -76,6 +81,21 @@ public class PartidaService {
         partida.adicionarUsuario(usuario);
         repository.save(partida);
         return "Usuário cadastrado com sucesso na partida";
+    }
+
+    @Transactional
+    public String sairPartida(int id){
+        Usuario usuarioLogado = SessaoSistema.getInstance().getUsuarioLogado();
+        Partida partida = repository.findById(id);
+        if(partida.getUsuario().stream().anyMatch(u -> u.getId() == usuarioLogado.getId())) {
+            repository.removeUsuarioFromPartida(id, usuarioLogado.getId());
+            partida.setDisponibilidade(true);
+            repository.save(partida);
+
+            return "Usuário saiu da partida com sucesso";
+        } else {
+            return "Erro: Usuário não está na partida";
+        }
     }
 
     public List<PartidaDto> listaPartidasPorMunicipioId(int municipioId){

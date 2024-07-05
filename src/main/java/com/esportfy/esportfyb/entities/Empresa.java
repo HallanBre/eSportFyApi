@@ -15,6 +15,8 @@ public class Empresa {
     private String cnpj;
     private String contato;
     private String email;
+    @OneToOne
+    private Usuario usuario;
     @OneToMany
     @JoinColumn(name="quadra_id")
     private List<Quadra> quadra;
