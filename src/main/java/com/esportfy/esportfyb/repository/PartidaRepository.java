@@ -28,4 +28,7 @@ public interface PartidaRepository extends JpaRepository<Partida, Integer> {
     @Modifying
     @Query(value = "DELETE FROM partida_usuario WHERE partida_id = :partidaId AND usuario_id = :usuarioId", nativeQuery = true)
     void removeUsuarioFromPartida(int partidaId, int usuarioId);
+
+    @Query("SELECT p FROM Partida p JOIN p.usuarios u WHERE u = :usuario")
+    List<Partida> findAllByUsuario(Usuario usuario);
 }

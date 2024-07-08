@@ -77,6 +77,8 @@ public class PartidaService {
             return "Usuário cadastrado com sucesso na partida";
         }else if (partida.getUsuario().contains(usuario)) {
             return "Erro: Usuário já está cadastrado na partida";
+        }else if (isUserInAnotherMatchAtTheSameTime(usuario, partida)) {
+            return "Erro: Usuário já está cadastrado em outra partida no mesmo horário";
         }
         partida.adicionarUsuario(usuario);
         repository.save(partida);
@@ -101,6 +103,16 @@ public class PartidaService {
     public List<PartidaDto> listaPartidasPorMunicipioId(int municipioId){
         List<Partida> partidas = repository.findByMunicipioId(municipioId);
         return partidas.stream().map(PartidaDto::new).collect(Collectors.toList());
+    }
+
+    public boolean isUserInAnotherMatchAtTheSameTime(Usuario usuario, Partida newPartida) {
+        List<Partida> partidas = repository.findAllByUsuario(usuario);
+        for (Partida partida : partidas) {
+            if (partida.getDataHora().equals(newPartida.getDataHora())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
